@@ -7,6 +7,11 @@ const path = require('path');
 const logger = require('./utils/logger');
 const mountRoutes = require('./routes');
 
+if(!process.env.JWTkey){
+    logger.error('FATAL ERROR: JWTkey is not defined.');
+    process.exit(1);
+}
+
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));

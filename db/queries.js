@@ -1,4 +1,4 @@
-const create_back_scratchers = `CREATE TABLE backScratcher (
+const create_back_scratchers = `CREATE TABLE IF NOT EXISTS backScratcher (
     id SERIAL PRIMARY KEY,
     item_name VARCHAR NOT NULL UNIQUE,
     item_description VARCHAR NOT NULL,
@@ -32,6 +32,8 @@ const backScratcher_update = `UPDATE backScratcher
 const backScratcher_delete = `DELETE FROM backScratcher
     WHERE item_name = $1 returning *
 `;
+
+
 
 module.exports = {
     create_back_scratchers,

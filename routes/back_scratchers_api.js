@@ -10,6 +10,8 @@ const { backscratchersList,
         backScratcher_update,
         backScratcher_delete } = require('../db/queries');
 
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 
 /**
  * CRUD for backscratcher api
@@ -20,7 +22,7 @@ router.get('/', (req,res) => {
         .catch(err => res.status(404).send(err))
 })
 
-router.post('/', (req,res) => {
+router.post('/', [auth,admin], (req,res) => {
 
     const { name, description, size, cost } = req.body;
 
@@ -34,7 +36,7 @@ router.post('/', (req,res) => {
 })
 
 
-router.put('/:name', async(req,res) => {
+router.put('/:name', [auth,admin], async(req,res) => {
 
     const { name, description, size, cost } = req.body;
     try{
@@ -58,11 +60,11 @@ router.put('/:name', async(req,res) => {
     
 })
 
-router.delete('/:name', async(req,res) => {
+router.delete('/:name', [auth,admin], async(req,res) => {
 
     const name = req.params.name;
     try{
-        const result = await db.query(backScratcher_delete, [name]);
+        const result = await db.query(backScratcher_find, [name]);
         if(result.rowCount === 0) return res.status(404).send('The backscratcher with the given name was not found.');
     } catch(err){
         logger.error(err)
