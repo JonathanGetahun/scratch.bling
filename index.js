@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, '/client/build')));
 
 mountRoutes(app);
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '/client/build'));
+    res.sendFile(path.resolve(__dirname, '/client/public/index.html'));
   });
 
 
