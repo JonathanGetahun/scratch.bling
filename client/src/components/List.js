@@ -39,7 +39,7 @@ const List = () => {
     const [scratchers, setScratchers] = useState([]); 
     const classes = useStyles();
 
-    const baseURL = 'http://localhost:4000/api/v1/backscratchers';
+    const baseURL = process.env.NODE_ENV === 'production' ? '/api/v1/backscratchers' : 'http://localhost:4000/api/v1/backscratchers';
     useEffect(() => {
         const fetchData = async() => {
             try{

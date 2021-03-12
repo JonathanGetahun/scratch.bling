@@ -22,7 +22,9 @@ const httpClient = (url, options = {}) => {
   return fetchUtils.fetchJson(url, options);
 }
 
-const dataProvider = jsonServerProvider('http://localhost:4000/api/v1', httpClient);
+const baseURL = process.env.NODE_ENV === 'production' ? '/api/v1' : "http://localhost:4000/api/v1";
+
+const dataProvider = jsonServerProvider(baseURL, httpClient);
 
 function App() {
    return (
