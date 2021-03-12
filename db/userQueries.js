@@ -19,7 +19,22 @@ const user_add = `INSERT INTO users(
 
 
 const user_delete = `DELETE FROM users
-    WHERE item_name = $1 returning *
+    WHERE id = $1 returning *
+`;
+
+const user_get = `SELECT id, username, is_admin FROM users 
+    WHERE id = $1
+`;
+
+const userId_find = `SELECT * FROM users
+WHERE id = $1
+`;
+
+const user_update = `UPDATE users
+    SET username = $1,
+        password = $2,
+        is_admin = $3
+    WHERE id = $4
 `;
 
 module.exports = {
@@ -27,5 +42,8 @@ module.exports = {
     getUserList,
     user_find,
     user_add,
-    user_delete
+    user_delete,
+    user_get,
+    userId_find,
+    user_update
 }

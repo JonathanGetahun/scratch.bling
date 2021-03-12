@@ -7,5 +7,5 @@ module.exports = (app) => {
     app.use('/uploadScratcher', createBackScratcher),
     app.use('/api/v1/backscratchers', backScratchersAPI),
     app.use('/uploadUserTable', createUserTable),
-    app.use('/admin', user)
+    app.use('/api/v1/users', user)
 };
