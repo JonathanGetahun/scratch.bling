@@ -2,7 +2,7 @@ require('dotenv').config();
 const Router = require('express-promise-router');
 const router = new Router();
 const Joi = require('joi');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
