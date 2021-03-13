@@ -1,6 +1,8 @@
+const baseURL = process.env.NODE_ENV === 'production' ? '/api/v1/users/auth' : "http://localhost:4000/api/v1/users/auth";
+
 const authProvider = {
     login: ({ username, password }) =>  {
-        const request = new Request('http://localhost:4000/api/v1/users/auth', {
+        const request = new Request(`${baseURL}`, {
             method: 'post',
             mode: "cors",
             body: JSON.stringify({ username, password }),
