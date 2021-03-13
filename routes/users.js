@@ -67,30 +67,24 @@ router.post('/', [auth,admin], async(req,res) => {
  * For user logging in.
  */
 router.post('/auth', async(req,res) => {
-    console.log('I AM BEING REACHED!!!!!!! ')
     const { username, password } = req.body;
  
     const { error } = validateUser(req.body);
-    console.log('I AM BEING REACHED!!!!!!! 2', error)
+
     if(error) return res.status(400).send(error.details[0].message); 
 
     try{
-        console.log('I AM BEING REACHED!!!!!!! 3')
         const result = await db.query(user_find, [username]);
-        console.log('I AM BEING REACHED!!!!!!! 4', result)
         if(result.rowCount === 0) return res.status(400).send('Invalid username or password.');
         
         const user = result.rows[0];
 
         const validPassword = await bcrypt.compare(password, user.password);
-        console.log('I AM BEING REACHED!!!!!!! 5', validPassword)
         if(!validPassword) return res.status(400).send('Invalid username or password');
 
         const token = jwt.sign({username, is_admin:user.is_admin}, process.env.JWTkey);
-        console.log('I AM BEING REACHED!!!!!!! 6', token)
         res.status(200).send(token)
     } catch(err){
-        console.log('I AM BEING REACHED!!!!!!! 7', err)
         logger.error(err);
         res.status(500).send(err.detail)
     }  
