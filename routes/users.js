@@ -67,7 +67,7 @@ router.post('/', [auth,admin], async(req,res) => {
  * For user logging in.
  */
 router.post('/auth', async(req,res) => {
-
+    console.log('I AM BEING REACHED!!!!!!! ')
     const { username, password } = req.body;
  
     const { error } = validateUser(req.body);
