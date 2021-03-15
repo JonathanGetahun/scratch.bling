@@ -97,7 +97,7 @@ router.put('/:id', [auth,admin], async(req,res) => {
     let changedPassword = false;
     try{
         const result = await db.query(userId_find, [req.params.id]);
-        if(result.rowCount === 0) return res.status(404).send('The backscratcher with the given name was not found.');
+        if(result.rowCount === 0) return res.status(404).send('The backscratcher with the given id was not found.');
         const user = result.rows[0];
         changedPassword = await bcrypt.compare(password, user.password);
         if(!changedPassword) {
